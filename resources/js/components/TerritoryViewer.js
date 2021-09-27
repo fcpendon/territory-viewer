@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
+import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import TreeView from '@mui/lab/TreeView';
@@ -24,8 +25,11 @@ const TerritoryViewer = (props) => {
 
   return (
     <Paper style={{ width: 600, margin: '0px auto', padding: 20, justifyContent: "center" }}>
-      <Typography variant="h2" color="primary" sx={{ mb: 5, textAlign: 'center' }}>
+      <Typography variant="h2" color="primary" sx={{ my: 5, textAlign: 'center' }}>
         Territory Viewer
+      </Typography>
+      <Typography sx={{ mb: 3, textAlign: 'right' }}>
+        Hi, {props.user} | <Link href="account/logout">Log Out</Link>
       </Typography>
       <TreeView defaultCollapseIcon={<ExpandMoreIcon />} defaultExpandIcon={<ChevronRightIcon />}>
         {buildChildren(tree)}
@@ -39,6 +43,7 @@ export default TerritoryViewer;
 if (document.getElementById('territory-viewer')) {  
   const element = document.getElementById('territory-viewer');
   const tree = element.dataset.tree;
+  const user = element.dataset.user;
 
-  ReactDOM.render(<TerritoryViewer tree={tree} />, element);
+  ReactDOM.render(<TerritoryViewer tree={tree} user={user} />, element);
 }

@@ -20,8 +20,12 @@ Route::get('/', function () {
     $tree = new TerritoryTree;
     $data = $tree->fetchTerritories();
     $result = $tree->build($data);
+    $user = session('user');
 
-    return view('home', compact('result'));
+    if (!$user)
+        return redirect()->route('login');
+
+    return view('home', compact('result', 'user'));
 })->name('home');
 
 Route::get('/account/login', function () {
@@ -40,5 +44,14 @@ Route::post('/account/login', function (Request $request) {
         return back()->withError($result['message']);
     }
 
+    session(['user' => $result['displayName']]);
+
     return redirect()->route('home');
 });
+
+
+Route::get('/account/logout', function () {
+    session()->forget('user');
+
+    return redirect()->route('login');
+})->name('logout');

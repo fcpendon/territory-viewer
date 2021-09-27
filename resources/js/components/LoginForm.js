@@ -14,7 +14,7 @@ const LoginForm = (props) => {
       <Paper style={{ width: 300, margin: '0px auto', padding: 20 }}>
         <form method="POST">
           <input type="hidden" name="_token" value={token} />
-          <Typography variant="h6" color="primary" sx={{ mb:3, textAlign: 'center' }}>
+          <Typography variant="h5" color="primary" sx={{ my:3, textAlign: 'center' }}>
             Territory Viewer
           </Typography>
           <TextField label="Username" name="username" variant="standard" fullWidth required autoFocus />
