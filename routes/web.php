@@ -16,14 +16,14 @@ use App\Models\TerritoryTree;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function () {    
+    $user = session('user');
+    if (!$user)
+        return redirect()->route('login');
+
     $tree = new TerritoryTree;
     $data = $tree->fetchTerritories();
     $result = $tree->build($data);
-    $user = session('user');
-
-    if (!$user)
-        return redirect()->route('login');
 
     return view('home', compact('result', 'user'));
 })->name('home');
