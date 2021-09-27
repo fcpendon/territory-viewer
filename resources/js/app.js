@@ -13,3 +13,4 @@ require('./bootstrap');
  */
 
 require('./components/LoginForm');
+require('./components/TerritoryViewer');
