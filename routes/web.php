@@ -16,6 +16,14 @@ use App\Models\TerritoryTree;
 |
 */
 
+Route::get('/', function () {
+    $tree = new TerritoryTree;
+    $data = $tree->fetchTerritories();
+    $result = $tree->build($data);
+
+    return view('home', compact('result'));
+})->name('home');
+
 Route::get('/account/login', function () {
     return view('login');
 })->name('login');
