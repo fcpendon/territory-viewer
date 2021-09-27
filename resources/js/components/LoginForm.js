@@ -23,7 +23,7 @@ const LoginForm = (props) => {
         </form>
       </Paper>
 
-      {props.error && <Alert severity="error" sx={{ width: 300, mx: 'auto' }}>{props.error}</Alert>}
+      {props.error && <Alert severity="error" sx={{ width: 300, margin: '10px auto' }}>{props.error}</Alert>}
     </div>
   );
 }
