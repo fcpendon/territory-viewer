@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\TerritoryTree;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +16,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/account/login', function () {
     return view('login');
+})->name('login');
+
+Route::post('/account/login', function (Request $request) {
+    $user = new User;
+    $username = $request->username;
+    $password = $request->password;
+
+    $response = $user->login($username, $password);
+    $result = $response->json();
+
+    if ($response->failed()) {
+        return back()->withError($result['message']);
+    }
+
+    return redirect()->route('home');
 });
